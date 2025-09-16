@@ -1,0 +1,17 @@
+﻿{
+  "Email": "salah.ouartani@gmail.com",
+  "MotDePasse": "Ouartani--18",
+  "ConfirmationMotDePasse": "Ouartani--18",
+  "Civilite": "Mr",
+  "Nom": "Ouartani",
+  "Prenom": "Prenom",
+  "PaysResidence": "France",
+  "PaysNationalite": [ "Tunisie" ],
+  "CodePostal": "75005",
+  "Ville": "Paris",
+  "Telephone": "0033612345678",
+  "Profession": "etudiant",
+  "DomaineEtude": "Mathématiques",
+  "NiveauEtude": "Licence 3",
+  "ConcentementTraitementDonnee": true
+}

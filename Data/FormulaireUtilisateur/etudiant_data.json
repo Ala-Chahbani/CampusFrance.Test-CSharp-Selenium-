@@ -1,0 +1,36 @@
+﻿[
+  {
+    "Email": "salah.ouartani@gmail.com",
+    "MotDePasse": "Ouartani--18",
+    "ConfirmationMotDePasse": "Ouartani--18",
+    "Civilite": "Mr",
+    "Nom": "Ouartani",
+    "Prenom": "Prenom",
+    "PaysResidence": "-France",
+    "PaysNationalite": [ "Tunisie", "France", "Algérie" ],
+    "CodePostal": "75005",
+    "Ville": "Paris",
+    "Telephone": "0033612345678",
+    "Profession": "etudiant",
+    "DomaineEtude": "Mathématiques",
+    "NiveauEtude": "Licence 3",
+    "ConcentementTraitementDonnees": true
+  },
+  {
+    "Email": "manel.sakli@gmail.com",
+    "MotDePasse": "Sakli-Manel1",
+    "ConfirmationMotDePasse": "Sakli-Manel1",
+    "Civilite": "Mme",
+    "Nom": "Sakli",
+    "Prenom": "Manel",
+    "PaysResidence": "-France",
+    "PaysNationalite": [ "Maroc" ],
+    "CodePostal": "38000",
+    "Ville": "Paris",
+    "Telephone": "0033687654321",
+    "Profession": "etudiant",
+    "DomaineEtude": "Sciences économiques et politiques",
+    "NiveauEtude": "Master 2",
+    "ConcentementTraitementDonnees": false
+  }
+]

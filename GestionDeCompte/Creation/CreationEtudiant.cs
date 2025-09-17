@@ -169,10 +169,26 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
             // le fichier JSON du formulaire utilisateur doit être copié dans le dossier du build de test
             FormulaireUtilisateur formulaireUtilisateur = LectureFormulaireUtilisateur.LectureFormulaireUtilisateurDepuisJSON(".\\Data\\FormulaireUtilisateur\\etudiant_data.json");
             
+            // remplissage du formulaire
             Driver.Navigate().GoToUrl(UrlPageCreation);
             RenseignementFormulaireEntier(formulaireUtilisateur);
 
-            Assert.Ignore();
+            // le fichier JSON des valeurs attendues doit être copié dans le dossier du build de test
+            FormulaireUtilisateur valeursAttendues = LectureFormulaireUtilisateur.LectureFormulaireUtilisateurDepuisJSON(".\\Data\\FormulaireUtilisateur\\etudiant_expected.json");
+            Assert.Multiple(() =>
+            {
+                // vérification du bouton de création
+                Assert.That(Driver.FindElement(By.Id("edit-submit")).GetAttribute("value"), Is.EqualTo("Créer un compte"));
+
+                // vérification de la case de fonction
+                Assert.That(Driver.FindElement(By.Id("edit-field-publics-cibles-2")).Selected, Is.EqualTo(true));
+
+                // vérification du domaine d'étude
+                Assert.That(Driver.FindElement(By.XPath("//*[@id=\"edit-field-domaine-etudes-wrapper\"]/div/div/div[1]/div")).Text, Is.EqualTo(valeursAttendues.DomaineEtude));
+
+                // vérification du niveau d'étude
+                Assert.That(Driver.FindElement(By.XPath("//*[@id=\"edit-field-niveaux-etude-wrapper\"]/div/div/div[1]/div")).Text, Is.EqualTo(valeursAttendues.NiveauEtude));
+            });
         }
 
         // code exécuté après l'exécution de tous les tests de la classe CreationEtudiant

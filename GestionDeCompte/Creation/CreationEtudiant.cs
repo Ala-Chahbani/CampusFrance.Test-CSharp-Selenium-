@@ -31,7 +31,8 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
                     IWebElement boutonRefusCookies = Driver.FindElement(By.Id("tarteaucitronAllDenied2"));
                     boutonRefusCookies.Click();
                     return !boutonRefusCookies.Displayed;
-                } catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     return false;
                 }
@@ -47,15 +48,15 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
             Driver.FindElement(By.Id("edit-pass-pass2")).SendKeys(utilisateur.ConfirmationMotDePasse);
 
             // civilité
-            if(utilisateur.Civilite == "Mr")
+            if (utilisateur.Civilite == "Mr")
             {
                 Driver.FindElement(By.XPath("//*[@id=\"edit-field-civilite\"]/div[2]/label")).Click();
             }
-            else if(utilisateur.Civilite == "Mme")
+            else if (utilisateur.Civilite == "Mme")
             {
                 Driver.FindElement(By.XPath("//*[@id=\"edit-field-civilite\"]/div[1]/label")).Click();
             }
-            
+
             // nom
             Driver.FindElement(By.Id("edit-field-nom-0-value")).SendKeys(utilisateur.Nom);
 
@@ -82,7 +83,7 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
                         Driver.FindElement(By.Name("field_nationalite[" + i + "][target_id]"));
                         return true;
                     }
-                    catch(Exception ex) 
+                    catch (Exception ex)
                     {
                         return false;
                     }
@@ -122,7 +123,7 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
             Driver.FindElement(By.Id("edit-field-telephone-0-value")).SendKeys(utilisateur.Telephone);
 
             // etudiant
-            if(utilisateur.Profession == "etudiant")
+            if (utilisateur.Profession == "etudiant")
             {
                 Driver.FindElement(By.XPath("//*[@id=\"edit-field-publics-cibles\"]/div[1]/label")).Click();
 
@@ -134,7 +135,7 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
                         Driver.FindElement(By.Id("edit-field-domaine-etudes-selectized"));
                         return true;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         return false;
                     }
@@ -156,7 +157,7 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
             }
 
             // consentement de traitement des données
-            if(utilisateur.ConcentementTraitementDonnees)
+            if (utilisateur.ConcentementTraitementDonnees)
             {
                 Driver.FindElement(By.XPath("//*[@id=\"edit-field-accepte-communications-wrapper\"]/div/label")).Click();
             }
@@ -167,14 +168,14 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
         public void RenseignementEtudiantMathematiquesLicence3()
         {
             // le fichier JSON du formulaire utilisateur doit être copié dans le dossier du build de test
-            FormulaireUtilisateur formulaireUtilisateur = LectureFormulaireUtilisateur.LectureFormulaireUtilisateurDepuisJSON(".\\Data\\FormulaireUtilisateur\\etudiant_data.json");
-            
+            FormulaireUtilisateur formulaireUtilisateur = LectureFormulaireUtilisateur.LectLecturePlusieursFormulairesUtilisateurDepuisJSON(".\\Data\\FormulaireUtilisateur\\etudiant_data.json")[0];
+
             // remplissage du formulaire
             Driver.Navigate().GoToUrl(UrlPageCreation);
             RenseignementFormulaireEntier(formulaireUtilisateur);
 
             // le fichier JSON des valeurs attendues doit être copié dans le dossier du build de test
-            FormulaireUtilisateur valeursAttendues = LectureFormulaireUtilisateur.LectureFormulaireUtilisateurDepuisJSON(".\\Data\\FormulaireUtilisateur\\etudiant_expected.json");
+            FormulaireUtilisateur valeursAttendues = LectureFormulaireUtilisateur.LectLecturePlusieursFormulairesUtilisateurDepuisJSON(".\\Data\\FormulaireUtilisateur\\etudiant_expected.json")[0];
             Assert.Multiple(() =>
             {
                 // vérification du bouton de création
@@ -189,6 +190,42 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
                 // vérification du niveau d'étude
                 Assert.That(Driver.FindElement(By.XPath("//*[@id=\"edit-field-niveaux-etude-wrapper\"]/div/div/div[1]/div")).Text, Is.EqualTo(valeursAttendues.NiveauEtude));
             });
+        }
+
+        [Test]
+        public void RenseignementEtudiantSciencesEconomiquesEtPolitiquesMaster2()
+        {
+            // le fichier JSON du formulaire utilisateur doit être copié dans le dossier du build de test
+            FormulaireUtilisateur formulaireUtilisateur = LectureFormulaireUtilisateur.LectLecturePlusieursFormulairesUtilisateurDepuisJSON(".\\Data\\FormulaireUtilisateur\\etudiant_data.json")[1];
+
+            // remplissage du formulaire
+            Driver.Navigate().GoToUrl(UrlPageCreation);
+            RenseignementFormulaireEntier(formulaireUtilisateur);
+
+            // le fichier JSON des valeurs attendues doit être copié dans le dossier du build de test
+            FormulaireUtilisateur valeursAttendues = LectureFormulaireUtilisateur.LectLecturePlusieursFormulairesUtilisateurDepuisJSON(".\\Data\\FormulaireUtilisateur\\etudiant_expected.json")[1];
+            Assert.Multiple(() =>
+            {
+                // vérification du bouton de création
+                Assert.That(Driver.FindElement(By.Id("edit-submit")).GetAttribute("value"), Is.EqualTo("Créer un compte"));
+
+                // vérification de la case de fonction
+                Assert.That(Driver.FindElement(By.Id("edit-field-publics-cibles-2")).Selected, Is.EqualTo(true));
+
+                // vérification du domaine d'étude
+                Assert.That(Driver.FindElement(By.XPath("//*[@id=\"edit-field-domaine-etudes-wrapper\"]/div/div/div[1]/div")).Text, Is.EqualTo(valeursAttendues.DomaineEtude));
+
+                // vérification du niveau d'étude
+                Assert.That(Driver.FindElement(By.XPath("//*[@id=\"edit-field-niveaux-etude-wrapper\"]/div/div/div[1]/div")).Text, Is.EqualTo(valeursAttendues.NiveauEtude));
+            });
+        }
+
+        // code exécuté après l'exécution de chaque test de la classe CreationEtudiant
+        [TearDown]
+        public void TearDown()
+        {
+            // supprime les cookies enregistrées par le test
+            Driver.Manage().Cookies.DeleteAllCookies();
         }
 
         // code exécuté après l'exécution de tous les tests de la classe CreationEtudiant

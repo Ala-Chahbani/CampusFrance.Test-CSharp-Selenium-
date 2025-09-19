@@ -29,6 +29,7 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
                 {
                     IWebElement boutonRefusCookies = Driver.FindElement(By.Id("tarteaucitronAllDenied2"));
                     boutonRefusCookies.Click();
+                    Console.WriteLine("Je clique sur la fermeture des cookies";
                     return !boutonRefusCookies.Displayed;
                 }
                 catch (Exception e)

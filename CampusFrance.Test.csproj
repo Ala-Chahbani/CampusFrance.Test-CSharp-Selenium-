@@ -7,6 +7,8 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <ENV_IS_CI>false</ENV_IS_CI>
+
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,7 +2,6 @@ using CampusFrance.Test.DataUtils.ClassesJDD;
 using CampusFrance.Test.DataUtils.LectureJDD;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Support.UI;
 
 namespace CampusFrance.Test.GestionDeCompte.Creation

@@ -17,7 +17,7 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
         [OneTimeSetUp]
         public void Preparation()
         {
-            Driver.Manage().Window.Maximize();
+            Driver.Manage().Window.Size = new System.Drawing.Size(1920,1080);
         }
 
         private void RenseignementFormulaireEntier(FormulaireUtilisateur utilisateur)

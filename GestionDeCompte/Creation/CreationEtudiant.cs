@@ -1,6 +1,7 @@
 using CampusFrance.Test.DataUtils.ClassesJDD;
 using CampusFrance.Test.DataUtils.LectureJDD;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Support.UI;
 
@@ -22,9 +23,10 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
             {
                 options.AddArgument("headless=new");        // use the new headless mode
                 options.AddArgument("no-sandbox");          // CI
-                //options.AddArgument("remote-debugging-port=9222"); // ensure DevTools port is set
+                options.AddArgument("remote-debugging-port=9222"); // ensure DevTools port is set
             }
-            Driver = new EdgeDriver(options);
+            //Driver = new EdgeDriver(options);
+            Driver = new ChromeDriver();
             Driver.Manage().Window.Maximize();
         }
 

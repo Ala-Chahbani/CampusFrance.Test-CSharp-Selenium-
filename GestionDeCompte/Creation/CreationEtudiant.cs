@@ -10,7 +10,7 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
     public class CreationEtudiant
     {
         // gère le driver qui transmet les commandes utilisateurs au navigateur Edge
-        private IWebDriver Driver;
+        private readonly IWebDriver Driver = new ChromeDriver();
 
         private readonly string UrlPageCreation = "https://www.campusfrance.org/fr/user/register";
 
@@ -18,15 +18,6 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
         [OneTimeSetUp]
         public void Preparation()
         {
-            EdgeOptions options = new();
-            if (BuildInfo.BuildInfo.EnvIsCI != "false")
-            {
-                options.AddArgument("headless=new");        // use the new headless mode
-                options.AddArgument("no-sandbox");          // CI
-                options.AddArgument("remote-debugging-port=9222"); // ensure DevTools port is set
-            }
-            //Driver = new EdgeDriver(options);
-            Driver = new ChromeDriver();
             Driver.Manage().Window.Maximize();
         }
 

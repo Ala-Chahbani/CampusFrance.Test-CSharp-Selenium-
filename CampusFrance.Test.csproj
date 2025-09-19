@@ -7,7 +7,6 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <EnvIsCI>false</EnvIsCI>
 
   </PropertyGroup>
 
@@ -34,14 +33,5 @@
     </None>
   </ItemGroup>
 
-  <Target Name="GenerateBuildInfo" BeforeTargets="BeforeCompile">
-	<WriteLinesToFile
-	  File="Generated/BuildInfo.g.cs"
-	  Lines="namespace CampusFrance.BuildInfo { public static class BuildInfo { public const string EnvIsCI = &quot;$(EnvIsCI)&quot;%3B} }"
-	  Overwrite="true" />
-	<ItemGroup>
-	  <Compile Include="Generated/BuildInfo.g.cs" />
-	</ItemGroup>
-  </Target>
 
 </Project>

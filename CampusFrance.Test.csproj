@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -7,7 +7,7 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
-    <ENV_IS_CI>false</ENV_IS_CI>
+    <EnvIsCI>false</EnvIsCI>
 
   </PropertyGroup>
 
@@ -33,5 +33,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <Target Name="GenerateBuildInfo" BeforeTargets="BeforeCompile">
+	<WriteLinesToFile
+	  File="Generated/BuildInfo.g.cs"
+	  Lines="namespace CampusFrance.BuildInfo { public static class BuildInfo { public const string EnvIsCI = &quot;$(EnvIsCI)&quot;%3B} }"
+	  Overwrite="true" />
+	<ItemGroup>
+	  <Compile Include="Generated/BuildInfo.g.cs" />
+	</ItemGroup>
+  </Target>
 
 </Project>

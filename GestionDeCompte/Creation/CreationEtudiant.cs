@@ -1,6 +1,5 @@
 using CampusFrance.Test.DataUtils.ClassesJDD;
 using CampusFrance.Test.DataUtils.LectureJDD;
-using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Support.UI;
@@ -10,7 +9,7 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
     public class CreationEtudiant
     {
         // gère le driver qui transmet les commandes utilisateurs au navigateur Edge
-        private readonly IWebDriver Driver = new EdgeDriver();
+        private IWebDriver Driver;
 
         private readonly string UrlPageCreation = "https://www.campusfrance.org/fr/user/register";
 
@@ -18,6 +17,14 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
         [OneTimeSetUp]
         public void Preparation()
         {
+            EdgeOptions options = new();
+            if (BuildInfo.BuildInfo.EnvIsCI != "false")
+            {
+                options.AddArgument("headless=new");        // use the new headless mode
+                options.AddArgument("no-sandbox");          // CI
+                //options.AddArgument("remote-debugging-port=9222"); // ensure DevTools port is set
+            }
+            Driver = new EdgeDriver(options);
             Driver.Manage().Window.Maximize();
         }
 

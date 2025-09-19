@@ -2,6 +2,7 @@ using CampusFrance.Test.DataUtils.ClassesJDD;
 using CampusFrance.Test.DataUtils.LectureJDD;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
 namespace CampusFrance.Test.GestionDeCompte.Creation
@@ -9,7 +10,7 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
     public class CreationEtudiant
     {
         // gère le driver qui transmet les commandes utilisateurs au navigateur Edge
-        private readonly IWebDriver Driver = new ChromeDriver();
+        private IWebDriver Driver;
 
         private readonly string UrlPageCreation = "https://www.campusfrance.org/fr/user/register";
 
@@ -17,6 +18,10 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
         [OneTimeSetUp]
         public void Preparation()
         {
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("--headless"); // à commenter en cas d'exécution locale
+            options.AddArgument("--window-size=1920,1080");
+            Driver = new ChromeDriver(options);
             Driver.Manage().Window.Size = new System.Drawing.Size(1920,1080);
         }
 
@@ -29,7 +34,6 @@ namespace CampusFrance.Test.GestionDeCompte.Creation
                 {
                     IWebElement boutonRefusCookies = Driver.FindElement(By.Id("tarteaucitronAllDenied2"));
                     boutonRefusCookies.Click();
-                    Console.WriteLine("Je clique sur la fermeture des cookies");
                     return !boutonRefusCookies.Displayed;
                 }
                 catch (Exception e)
